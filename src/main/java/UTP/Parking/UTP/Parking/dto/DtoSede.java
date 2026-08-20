@@ -1,0 +1,17 @@
+package UTP.Parking.UTP.Parking.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class DtoSede {
+    private Integer idSede;
+    private String nombre;
+    private String direccion;
+    private Integer cantidad;
+}

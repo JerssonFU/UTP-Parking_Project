@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+
+<!-- <link rel="icon" type="image/png" th:href="@{/img/favicon.ico}" />  -->
+<link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.ico}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<meta name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+<meta name="user-id" th:content="${#httpServletRequest.userPrincipal != null ? #httpServletRequest.userPrincipal.principal.id : ''}" />
+<meta name="user-role" th:content="${#httpServletRequest.userPrincipal != null ? #httpServletRequest.userPrincipal.principal.role : ''}" />
+<meta name="_csrf" th:content="${_csrf.token}"/> 
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/> 
+<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">UTP+ Parking | Universidad Tenológica del Perú</title>
+
+<style th:replace="~{admin/fragments/_style}"></style>
+
+</head>
+
+<body class="fix-header card-no-border fix-sidebar">
+    
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">UTP+ Parking</p>
+        </div>
+    </div>
+
+
+    <div id="main-wrapper">	
+
+		<div th:replace="~{admin/fragments/_header}"></div>		
+
+		<div th:replace="~{admin/fragments/_left-side-bar}"></div>	
+	
+		
+		<div class="page-wrapper">
+		 
+		    <div class="container-fluid">    
+                
+               <div layout:fragment="content" id="fragDinamico"></div> 
+               
+               <div th:replace="~{admin/fragments/_right-side-bar}"></div> 
+                                   
+		    
+		    </div>
+
+		    
+		 
+		 </div>	
+
+	</div>
+
+	<div th:replace="~{admin/fragments/_script}"></div>
+
+</body>
+
+</html>

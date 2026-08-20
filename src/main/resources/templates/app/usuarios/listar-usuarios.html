@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{admin/admin-layout}">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Listado de Usuarios</title>
+
+</head>
+
+<body>
+
+	<div th:fragment="fragListUsuarios">
+		
+          <div class="row page-titles">
+                   <div class="col-md-5 align-self-center">
+                       <h3 class="text-themecolor">Mantenedor de Usuarios</h3>
+                   </div>
+                   <div class="col-md-7 align-self-center">
+                       <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+                           <li class="breadcrumb-item">Usuarios</li>
+                           <li class="breadcrumb-item active">Lista</li>
+                       </ol>
+                   </div>  
+                    <!-- 
+                    <div class="">
+                        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10">
+                             <i class="ti-settings text-white"></i>
+                        </button>
+                    </div>                
+                   -->
+           </div> 
+
+			<div class="row">
+
+				<div class="col-12">					
+
+						<div class="panel panel-default">			
+
+							
+							  <ul class="nav navbar-nav ml-auto" style="float: right;">									
+										<li sec:authorize="hasAnyAuthority('ADMINISTRADOR')">											
+											<button type="button"  title="Nuevo Usuario"
+											   class="btn btn-outline-info btn-rounded"
+											    th:onclick="'javascript:viewRegistrarUsuario();'">
+											   + </button>
+									   </li>
+									   									   
+							  </ul>	
+				
+
+							<div class="panel-body">
+
+								<!-- Inicio | Zona filtro  -->							
+
+									<div class="row">
+
+										<div class="col-md-12">									
+
+										   <div id="adv-search" class="input-group">
+										 
+										        <input id="textoBusqueda" name="textoBusqueda" type="text"
+													class="form-control" placeholder="Ingrese texto a buscar" />     								
+
+												<div class="input-group-btn">												  
+
+													<div class="btn-group" role="group">																							
+
+														<div class="dropdown dropdown-lg">															
+															
+															 <button id="dlDropDownBAvanzada" type="button" 
+															         class="btn btn-secondary btn-outline dropdown-toggle" 
+                                                                     data-toggle="dropdown">
+			                                                        <span class="caret"></span> 
+			                                                        <span class="sr-only">Toggle Dropdown</span> 
+			                                                 </button>	                            
+			                                                							
+															
+															
+														     <div id="divDropDowMenu"
+																  class="dropdown-menu dropdown-menu-right" role="menu">
+																  
+																<div class="card-body">  														 
+
+																<form class="form-horizontal" role="form">
+																
+																    <div class="form-body">
+																   
+								                                        <h3 class="card-title">Busqueda avanzada</h3>
+								                                        
+								                                        <hr>
+								                                        
+								                                       <div class="row p-t-20">
+								                                       
+								                                            <div class="col-md-6">
+								                                                <div class="form-group has-success">
+								                                                    <label class="control-label">Dni:</label>
+								                                                    <input type="text" id="dniBusq" name="dniBusq" 
+								                                                           class="form-control" placeholder="Dni">
+								                                                </div>
+								                                            </div>
+								                                            
+								                                            <div class="col-md-6">
+								                                                <div class="form-group has-success">
+								                                                    <label class="control-label">Apellido Paterno:</label>
+								                                                    <input type="text" id="apPaternoBusq" name="apPaternoBusq" 
+								                                                           class="form-control" placeholder="Apellido Paterno">								                                                    
+                                                                                 </div>
+								                                            </div>
+								                                            
+								                                       </div> 
+								                                       
+								                                        <div class="row">
+								                                            <div class="col-md-6">
+								                                                <div class="form-group has-success">
+								                                                    <label class="control-label">Apellido Materno:</label>
+								                                                    <input type="text" id="apMaternoBusq" name="apMaternoBusq" 
+								                                                           class="form-control" placeholder="Apellido Materno">
+								                                                </div>
+								                                            </div>
+								                                            
+								                                            
+								                                           
+								                                            <div class="col-md-6">
+								                                                <div class="form-group has-success">
+								                                                    <label class="control-label">Nombres:</label>
+								                                                    <input type="text" id="nombresBusq" name="nombresBusq" 
+								                                                           class="form-control" placeholder="Nombres">
+								                                                </div>
+								                                            </div>
+								                                           
+								                                        </div>     
+								                                        
+								                                 								                                        
+								                                    </div> 									
+
+																	
+
+																	<div class="text-right">																		
+																		
+																		<button id="buscarPersonalizado" type="button" 
+																		        class="btn btn-info btn-circle" title="Buscar"
+																		        th:onclick="'javascript:recargar(1);'">
+																		        <i class=" fas fa-search"></i> 
+																		</button>																				
+																		
+																	</div>
+																	
+																	<br>
+																	
+																</form>
+																
+																</div>
+
+															</div>
+															
+														</div>													
+
+														<div class="text-right">						
+															
+															<button id="buscarGeneral" type="button" 
+															        class="btn btn-info btn-circle" title="Buscar"
+															        th:onclick="'javascript:recargar(0);'">
+															       <i class=" fas fa-search"></i> 
+															</button>														
+															
+															
+														</div>
+														
+													
+
+													</div>
+													
+												</div>
+												
+											</div>
+											
+										</div>
+
+									</div>								
+
+								<!-- Fin | Zona filtro  -->
+
+												
+
+								<div class="card">
+                                   
+                                    <div class="card-body">                                 
+                                    
+									<table id="tblUsuarios"
+										class="table table-striped table-bordered dt-responsive nowrap"  
+										    style="width: 100%">
+										    
+										<thead>					
+										
+											<tr>												
+												<th>Dni</th>
+												<th>Apellido Paterno</th>
+												<th>Apellido Materno</th>
+												<th>Nombres</th>												
+												<th>Fecha Nacimiento</th>
+												<th>Oficina</th>
+												<th>Email</th>
+												<th>UserName</th>
+												<th>Domicilio</th>
+												<th>Sexo</th>
+												<th>Estado</th>
+												<th>Opciones</th>
+											</tr>
+										</thead>
+
+									</table>
+									
+									 <!-- <a id="back-to-top" href="#" class="btn btn-info btn-lg back-to-top" 
+									   role="button" title="volver al inicio de pagina" 
+									   data-toggle="tooltip" data-placement="left">
+									   <span >
+									    <i class="fas fa-chevron-up"></i>
+									   </span>
+									</a> 		 -->						
+									
+
+                                  </div>
+                                  
+								</div>						
+
+						</div>					
+
+				</div>
+
+			</div>			 
+			
+		</div>
+		
+		
+		<!-- Inicio Modal usuario sistema -->
+
+			<div id="modalUsuarioSistema" class="modal fade" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+						    <h4 class="modal-title" id="gridSystemModalLabel">Usuarios-Sistema</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>						
+						</div>
+						<div class="modal-body"></div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Fin Modal usuario sistema -->
+		
+		
+		
+
+
+		<!-- aca van los js -->
+		<script type="text/javascript" th:inline="javascript"
+			th:src="@{/app/usuarios/listar.usuarios.js}"></script>
+
+	</div>
+
+</body>
+
+</html>

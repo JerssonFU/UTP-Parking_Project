@@ -1,0 +1,67 @@
+server:
+  port: 8093
+  servlet:
+    context-path: /jer
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/DB_UTP_PARKING?currentSchema=public}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:alonex18}
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 20
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  thymeleaf:
+    cache: false
+    check-template: true
+    check-template-location: true
+    enabled: true
+    encoding: UTF-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+
+  mvc:
+    contentnegotiation:
+      favor-parameter: true
+      media-types:
+        pdf: application/pdf
+        xlsx: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        xml: application/xml
+        json: application/json
+
+  servlet:
+    multipart:
+      max-file-size: 11MB
+      max-request-size: 11MB
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.hibernate.SQL: INFO

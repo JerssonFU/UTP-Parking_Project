@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<header class="topbar">
+  
+     <nav class="navbar top-navbar navbar-expand-md navbar-light">        
+
+
+         <div class="navbar-collapse">            
+
+             <ul class="navbar-nav mr-auto">
+
+                            
+                 <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" 
+                     href="javascript:void(0)"><i class="ti-menu"></i></a> 
+                 </li>
+
+                 <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" 
+                    href="javascript:void(0)"><i class="ti-menu"></i></a> 
+                  </li>
+
+                 <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href=""
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <img th:src="@{/assets/images/logo.png}"
+                              loading="lazy" style="max-height: 2.4rem" height="36" width="130" />
+                     </a>
+                 </li>
+
+             </ul>
+
+
+             <ul class="navbar-nav my-lg-0">
+
+                 <li class="nav-item dropdown mega-dropdown"> 
+
+                     <a class="nav-link dropdown-toggle waves-effect waves-dark" 
+                        href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <i class="bi bi-bell right-side-toggle"></i>
+                     </a>
+
+                 </li>
+
+
+                 <li class="nav-item dropdown">
+                 
+                      <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img th:src="@{/assets/images/users/user-9.png}" alt="user" class="profile-pic" />
+                      </a>
+                     
+                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                        
+                         <ul class="dropdown-user">
+                            
+                             <li>
+                                 <div class="dw-user-box">
+                                 
+                                     <div class="u-img col-md-12">
+                                       <img th:src="@{/assets/images/users/user-9.png}" alt="user">
+                                     </div>
+                                     
+                                     <div class="u-text">                                     
+                                       <small>
+                                         <span th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+							                 <span th:if="${currentUser != null}">
+						                          <span th:text="${currentUser.nombres} +' '+ ${currentUser.apellidoPaterno}">
+						                            	Full Username
+						                         </span>
+							          		 </span>
+							          	 </span>   
+                                         </small>
+                                         
+                                         <p class="text-muted">
+                                         
+                                         <span th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+							                 <span th:if="${currentUser != null}">
+						                          <span th:text="${currentUser.descripcionCarrera}">
+						                            	carrera
+						                         </span>
+							          		 </span>
+							          	 </span>                                         
+                                         
+                                         </p>
+                                         
+                                      </div> 
+                                                                           
+                                 </div>
+                                 
+                             </li>
+                             <li><a th:href="@{/cambioClave}">
+                                 <i class="ti-settings"></i> Cambiar de Clave</a></li>
+
+                             <li><a th:href="@{/logout}"><i class="fa fa-power-off"></i> Cerrar Sesion</a></li>
+                             
+                         </ul>
+                     </div>
+                 </li>
+             </ul>
+             
+         </div>
+         
+     </nav>
+     
+</header> 
+  
+ </html>

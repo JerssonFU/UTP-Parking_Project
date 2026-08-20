@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+</head>
+
+<body>
+
+	<div th:fragment="modalListUsuSistema">        
+
+			<div class="row">
+
+				<div class="col-12">					
+
+						<div class="panel panel-default">					
+
+							<div class="panel-body">		
+							
+							<input type="hidden" id="codUsuario" name="codUsuario" th:value="${codUsuario}" />	
+															
+
+								<div class="card">
+                                   
+                                    <div class="card-body">                                 
+                                    <table id="tblUsuSistema" class="table table-bordered table-striped"
+                                       style="width: 100%">								
+										    
+										<thead>					
+										
+											<tr>
+											    <th style="display: none">codigo</th>	
+												<th>Tipo Usuario</th>
+												<th>Sistema</th>									
+												
+											</tr>
+										</thead>
+
+									</table>									
+
+                                  </div>
+                                  
+								</div>
+
+							</div>
+
+						</div>			
+
+				</div>
+
+			</div>				 
+			
+		</div>
+
+		<!-- aca van los js -->
+		<script type="text/javascript" th:inline="javascript"
+			th:src="@{/app/modals/modal.lista-usuario.sistema.js}"></script>	
+
+</body>
+
+</html>

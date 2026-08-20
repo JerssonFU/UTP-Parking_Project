@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+</head>
+
+<body>
+
+	<div th:fragment="modalUsuSistema">        
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+				 <div class="card ">	
+				 
+				     <div class="card-header bg-info">
+                          <h4 class="m-b-0 text-white">REGISRO USUARIO-SISTEMA</h4>
+                     </div>
+				 
+				 	 <div class="card-body">
+				 	
+				 	   <form th:object="${usuSisDTO}" class="form-horizontal" role="form"
+								id="frmUsuarioSis" name="frmUsuarioSis" 
+								th:action="@{/usuario/guardarDatosUsuarioSistema}"
+								method="post" enctype="multipart/form-data">
+								
+								
+							<input type="hidden" id="codUsuario"
+										name="codUsuario"
+										th:value="${usuSisDTO.codUsuario}" />	
+								
+						     <div class="form-body">
+						     
+						       <h3 class="box-title">Datos Generales</h3>
+                               <hr class="m-t-0 m-b-40">   
+						     
+						     
+						     						     
+						     <div class="form-group">
+                                <label class="control-label">Tipos Usuario:<span class="text-danger">*</span></label>
+                                <select id="codTipoUsuario" name="codTipoUsuario" 
+                                        th:field="*{codTipoUsuario}"
+                                        class="form-control custom-select">
+                                        <option value="" selected="selected">...Seleccione...</option>
+									    <option th:each="items:${listaTipoUsurios}"
+															 th:value="${items.cTusuCodigo}"
+															 th:text="${items.nTusuDescripcion}" data-live-search="true">
+									   </option>
+	                             </select>                 
+	                             
+						     </div>
+						     
+						     <div class="form-group">
+                                <label class="control-label">Sistemas:<span class="text-danger">*</span></label>
+                                <select id="codSistema" name="codSistema" 
+                                        th:field="*{codSistema}"
+                                        class="form-control custom-select">
+                                        <option value="" selected="selected">...Seleccione...</option>
+									    <option th:each="items:${listaSistemas}"
+															 th:value="${items.cSisCodigo}"
+															 th:text="${items.nSisDescripcion}" data-live-search="true">
+									   </option>
+	                             </select>       
+						     </div>
+						     
+						    <!--  <div class="form-group">
+                                 <label class="control-label">Detalle:</label>
+                                  <input type="text" id="cTusuDetalle" name="cTusuDetalle"
+							             th:field="*{cTusuDetalle}" 
+                                         class="form-control" placeholder="Ingrese Detalle">      
+						     </div>     -->                                    
+                             
+                            <hr>				
+								
+						    </div>	
+						    
+								<div class="col-xs-12">
+									<div class="box-body" align="center">
+										<div class="box-body">
+											<button type="button" id="btnGuardarUsuarioSis" 
+											        class="btn btn-success">GUARDAR</button>											
+											<button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+										</div>
+									</div>
+								</div>
+
+							</form>				 	
+				 	
+				 	   </div>					
+
+				  </div>
+				
+				</div>
+
+			</div>				 
+			
+		</div>
+
+		<!-- aca van los js -->
+		<script type="text/javascript" th:inline="javascript"
+			th:src="@{/app/modals/modal.usuario.sistema.js}"></script>	
+
+</body>
+
+</html>

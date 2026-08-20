@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+</head>
+
+<body>
+
+	<div th:fragment="modalOficinas">        
+
+			<div class="row">
+
+				<div class="col-12">					
+
+						<div class="panel panel-default">					
+
+							<div class="panel-body">		
+							
+							<input type="hidden" id="flag" name="flag" th:value="${flag}" />	
+															
+
+								<div class="card">
+                                   
+                                    <div class="card-body">                                 
+                                    <table id="tblOficinas" class="table table-bordered table-striped"
+                                       style="width: 100%">								
+										    
+										<thead>					
+										
+											<tr>
+											    <th style="display: none">codigo Oficina</th>	
+												<th>Nombre Oficina</th>
+												<th>Siglas</th>												
+												<th>Opciones</th>
+											</tr>
+										</thead>
+
+									</table>									
+
+                                  </div>
+                                  
+								</div>
+
+							</div>
+
+						</div>			
+
+				</div>
+
+			</div>				 
+			
+		</div>
+
+		<!-- aca van los js -->
+		<script type="text/javascript" th:inline="javascript"
+			th:src="@{/app/modals/modal.oficinas.js}"></script>	
+
+</body>
+
+</html>

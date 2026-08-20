@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/admin-layout}">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Registro de Usuarios</title>
+
+</head>
+
+<body>
+
+	<div th:fragment="fragUsuario">
+	
+			<div class="row page-titles">
+                   <div class="col-md-5 align-self-center">
+                       <h3 class="text-themecolor">Registro nuevo Usuario</h3>
+                   </div>
+                   <div class="col-md-7 align-self-center">
+                       <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+                           <li class="breadcrumb-item">Usuario</li>
+                           <li class="breadcrumb-item active">Registro</li>
+                       </ol>
+                   </div>                  
+           </div> 
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+				 <div class="card ">	
+				 
+				     <div class="card-header bg-info">
+                          <h4 class="m-b-0 text-white">REGISRO DE USUARIOS</h4>
+                     </div>
+				 
+				 	 <div class="card-body">
+				 	
+				 	   <form th:object="${usuarioDTO}" class="form-horizontal" role="form"
+								id="frmUsuario" name="frmUsuario" 
+								th:action="@{/usuario/guardarDatosUsuario}"
+								method="post" enctype="multipart/form-data">
+								
+								
+							<input type="hidden" id="cPerlCodigo"
+										name="cPerlCodigo"
+										th:value="${usuarioDTO.cPerlCodigo}" />	
+								
+						     <div class="form-body">	                           
+                                    
+                               <h3 class="box-title">Datos Personales</h3>
+                               <hr class="m-t-0 m-b-40">                                
+                              
+                               <div class="row">
+                                      
+                                      <div class="col-md-6">
+                                          <div class="form-group row">
+                                              <label class="control-label text-right col-md-3">Dni:<span class="text-danger">*</span></label>                                             
+                                              <div class="col-md-9 input-group">
+                                                    <input type="text" id="nMstDni" name="nMstDni"
+                                                         placeholder="Ingrese Nro. Dni"  th:maxlength="8"
+											             class="form-control input_numeric" th:readonly="${flagEditar}"
+											             th:field="*{nMstDni}">    
+                                                    <div class="input-group-append">
+                                                        <button id="btnValidarPersona"  th:disabled="${flagEditar}" 
+                                                               class="btn btn-info" type="button">Consultar</button>
+                                                    </div>
+                                              </div> 
+                                          </div>
+                                      </div> 
+                                      <!--/span-->
+                                       
+                                      <div class="col-md-6">
+                                         <div class="form-group row">
+                                             <label class="control-label text-right col-md-3">Nombres:<span class="text-danger">*</span></label>
+                                             <div class="col-md-9">
+                                                 <input type="text" id="nMstNombre" name="nMstNombre"
+										               th:field="*{nMstNombre}" th:readonly="${flagEditar}"
+                                                        class="form-control" placeholder="Ingrese nombres">                                                  
+                                              </div>
+                                         </div>
+                                     </div>
+                                     <!--/span-->                                    
+                                                                          
+                                 </div>  
+                                 <!--/row-->                          
+                                 
+                                <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group row">
+                                              <label class="control-label text-right col-md-3">Apellido Paterno:<span class="text-danger">*</span></label>
+                                              <div class="col-md-9">
+                                                  <input type="text" id="nMstApepaterno" name="nMstApepaterno"
+											             th:field="*{nMstApepaterno}" th:readonly="${flagEditar}"
+                                                         class="form-control" placeholder="Ingrese apellido paterno">                                                  
+                                               </div>
+                                          </div>
+                                      </div>                                      
+                                      <!--/span-->
+                                      
+                                      <div class="col-md-6">
+                                          <div class="form-group row">
+                                              <label class="control-label text-right col-md-3">Apellido Materno:<span class="text-danger">*</span></label>
+                                              <div class="col-md-9">
+                                                  <input type="text" id="nMstApematerno" name="nMstApematerno"
+											             th:field="*{nMstApematerno}" th:readonly="${flagEditar}"
+                                                         class="form-control" placeholder="Ingrese apellido materno"> 
+                                               </div>
+                                          </div>
+                                      </div>
+                                      <!--/span-->
+                                      
+                                 </div> 							
+                                <!--/row--> 
+                                
+                                <div class="row"> 
+                                
+                                    <div class="col-md-6">
+	                                    <div class="form-group row">
+	                                        <label class="control-label text-right col-md-3">Sexo:<span class="text-danger">*</span></label>
+	                                        <div class="col-md-9">
+	                                            <select id="nMstSexo" name="nMstSexo" 
+	                                                       th:field="*{nMstSexo}"  th:disabled="${flagEditar}"
+	                                                       class="form-control custom-select">
+	                                                   <option value="1">Masculino</option>
+												       <option value="0">Femenino</option>
+	                                            </select>
+	                                        </div>
+	                                     </div>
+	                                 </div>
+	                                 <!--/span-->  
+	                                 
+	                                 <div class="col-md-6">
+	                                      <div class="form-group row">
+	                                          <label class="control-label text-right col-md-3">F.Nacimiento:<span class="text-danger">*</span></label>
+	                                          <div id='fecNacimiento' class="input-group col-md-9">
+	                                             <input type="text" id='fechaNacimiento' name="fechaNacimiento"
+													th:field="*{fechaNacimiento}" class="form-control"  th:disabled="${flagEditar}"
+													placeholder="dd/mm/yyyy"/>
+												 <span class="input-group-addon">
+												    <i class="far fa-calendar-alt"></i>
+												 </span>	
+											  </div>									  									 
+	                                      </div>
+                                     </div>  
+	                                  <!--/span-->            
+                                     
+                               </div> 							
+                               <!--/row--> 
+                               
+                               <div class="row"> 
+                                
+                                    <div class="col-md-6">
+                                         <div class="form-group row">
+                                            <label class="control-label text-right col-md-3">Ruc:</label>
+                                            <div class="col-md-9">
+                                                 <input type="text" id="mMstRuc" name="mMstRuc"
+                                                         placeholder="Ingrese Ruc" th:maxlength="11" 
+											             class="form-control input_numeric" th:field="*{mMstRuc}">                                                
+                                              </div>                                        
+                                            
+                                         </div>
+                                     </div>
+                                     <!--/span-->                                                           
+                                     
+                                     <div class="col-md-6">
+                                         <div class="form-group row">
+                                            <label class="control-label text-right col-md-3">Email:<span class="text-danger">*</span></label>
+                                            <div class="controls col-md-9">
+                                                
+                                                 <input type="text" id="nMstEmail" name="nMstEmail"
+                                                         placeholder="Ingrese Email"  th:readonly="${flagEditar}"
+                                                         data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" 
+                                                         data-validation-regex-message="Ingrese un email valido"
+											             class="form-control" th:field="*{nMstEmail}">                                           
+                                            </div>                                             
+                                         </div>
+                                     </div>
+                                     <!--/span-->
+                                                                          
+                               </div> 							
+                               <!--/row--> 
+                               
+                               <div class="row">                                                                                   
+                                     
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                           <label class="control-label text-right col-md-3">Telefono:</label>
+                                           <div class="col-md-9">
+                                                <input type="text" id="mMstTelefono" name="mMstTelefono"
+                                                        placeholder="Ingrese Telefono"
+										             class="form-control input_numeric" th:field="*{mMstTelefono}">                                                
+                                             </div>                                        
+                                           
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                           <label class="control-label text-right col-md-3">Celular:</label>
+                                           <div class="col-md-9">
+                                                <input type="text" id="mMstCelular" name="mMstCelular"
+                                                        placeholder="Ingrese Celular" th:maxlength="9" 
+										             class="form-control input_numeric" th:field="*{mMstCelular}">                                                
+                                             </div>                                        
+                                           
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                                                          
+                              </div> 							
+                              <!--/row-->                   
+                              
+                              <div class="row">                                             
+                                     
+                                    <div class="col-md-6">
+	                                    <div class="form-group row">
+	                                        <label class="control-label text-right col-md-3">Estado Civil:<span class="text-danger">*</span></label>
+	                                        <div class="col-md-9">
+	                                            <select id="cEstcCodigo" name="cEstcCodigo" 
+	                                                       th:field="*{cEstcCodigo}" 
+	                                                       class="form-control custom-select">
+	                                                   <option value="1">Soltero</option>
+												       <option value="2">Casado</option>
+												       <option value="3">Separado</option>
+												       <option value="4">Divorciado</option>
+												       <option value="5">Conviviente</option>
+												       <option value="6">Viudo</option>												      
+	                                            </select>                                       
+	                                        </div>
+                                        </div>
+                                 </div>
+                                 <!--/span-->                          
+                                                                          
+                              </div> 							
+                              <!--/row-->              
+                               
+                                                         
+                                     
+							<h3 class="box-title">Datos de Domicilio</h3>
+                            <hr class="m-t-0 m-b-40">     
+                            
+                            <div class="row">
+                                
+                                <div class="col-md-6">
+	                                    <div class="form-group row">
+	                                        <label class="control-label text-right col-md-3">Departamento:<span class="text-danger">*</span></label>
+	                                        <div class="col-md-9">
+	                                             <select id="cMstDomicilioDep" name="cMstDomicilioDep" 
+	                                                    th:field="*{cMstDomicilioDep}"
+	                                                    class="form-control custom-select">
+	                                                <option value="" selected="selected">...Seleccione...</option>
+											        <option th:each="items:${listaDepartamentos}"
+															 th:value="${items.siminUbigeoPK.cUbiCoddepartamento}"
+															 th:text="${items.nUbiNombre}" data-live-search="true">
+												    </option>
+	                                            </select>
+	                                        </div>
+	                                    </div>
+                                </div>
+                                <!--/span-->                     
+                               
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Provincia:<span class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <select id="cMstDomicilioProv" name="cMstDomicilioProv" 
+                                                    th:field="*{cMstDomicilioProv}" 
+                                                    class="form-control custom-select">
+                                                   <option value="0" selected="selected">...Seleccione...</option>
+										           <option th:if="${!listaProvincias.isEmpty()}" 
+										                   th:fragment="fragListProv"
+										                   th:each="items:${listaProvincias}"
+											               th:value="${items.siminUbigeoPK.cUbiCodprovincia}"
+											               th:text="${items.nUbiNombre}" 
+											               data-live-search="true">
+											       </option>
+                                            </select>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                
+                             </div>
+                            <!--/row--> 
+                            
+                            <div class="row">
+                            
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Distrito:<span class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <select id="cMstDomicilioDis" name="cMstDomicilioDis" 
+                                                    th:field="*{cMstDomicilioDis}" 
+                                                    class="form-control custom-select">
+                                                   <option value="0" selected="selected">...Seleccione...</option>
+										           <option th:if="${!listaDistritos.isEmpty()}" 
+										                   th:fragment="fragListDist"
+										                   th:each="items:${listaDistritos}"
+											               th:value="${items.siminUbigeoPK.cUbiCoddistrito}"
+											               th:text="${items.nUbiNombre}" 
+											               data-live-search="true">
+											       </option>
+                                            </select>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->                              
+                                
+                               <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Direccion:<span class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="nMstDomicilio" name="nMstDomicilio"
+					                               th:field="*{nMstDomicilio}"
+                                                   class="form-control" placeholder="Ingrese Direccion.">                                                  
+                                         </div>
+                                    </div>
+                              </div>
+                              <!--/span-->
+                                
+                             </div>                          
+                                                     
+							<h3 class="box-title">Situacion del Usuario</h3>
+                            <hr class="m-t-0 m-b-40">
+                            
+                            <div class="row">
+                            
+                                  <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Situacion:<span class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <select id="cSitCodigo" name="cSitCodigo" 
+                                                       th:field="*{cSitCodigo}" 
+                                                       class="form-control custom-select">
+                                                   <option value="1">Activo</option>
+											       <option value="2">Cesante</option>
+											       <option value="3">Montepio</option>
+											       <option value="4">Desconocido</option>
+											       <option value="5">Inactivo</option>
+                                            </select>                                       
+                                        </div>
+                                     </div>
+                                 </div>
+                                 <!--/span-->                     
+                                 
+                                 <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Tipo Regimen:<span class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <select id="cTingCodigo" name="cTingCodigo" 
+                                                       th:field="*{cTingCodigo}" 
+                                                       class="form-control custom-select">
+                                                   <option value="1">Nombrado</option>
+											       <option value="2">Contratado</option>
+											       <option value="3">Reasignado</option>
+											       <option value="4">Designado</option>
+											       <option value="5">Cas</option>
+											       <option value="6">Transferido</option>
+											       <option value="7">Cas por Sustitucion</option>
+											       <option value="8">Incorporado</option>
+											       <option value="9">Otro</option>
+											       <option value="10">Policial</option>
+											       <option value="11">Tercero</option>
+                                            </select>                                       
+                                        </div>
+                                     </div>
+                                 </div>
+                                 <!--/span-->                    
+                                  
+                             </div>
+                             <!--/row-->
+                             
+                            <h3 class="box-title">Oficinas</h3>
+                            <hr class="m-t-0 m-b-40">
+                                                          
+                            <div class="row">
+                                 
+                                 <div class="col-md-6">
+                                     <div class="form-group row">
+                                         <label class="control-label text-right col-md-3">Oficina Destaque:<span class="text-danger">*</span></label>                                        
+                                          <div class="col-md-9 input-group">
+                                                                                             
+                                                <input type="hidden" id="codOficDestaque"
+													name="codOficDestaque"
+													th:value="${usuarioDTO.codOficDestaque}" />	
+                                                
+                                                <input type="text" id="oficinaDestaque" name="oficinaDestaque"
+							                           th:readonly="true" th:value="${usuarioDTO.descOficinaDestaque}"
+                                                       class="form-control" placeholder="Seleccionar Oficina Destaque">     
+                                                 <div class="input-group-append">
+                                                     <button id="btnSeleccionarOfiPadre" title="Seleccionar Oficina" 
+                                                            class="btn btn-info" type="button"
+                                                            th:onclick="'javascript:mostrarModalOficinas(1);'">
+                                                        <i class="fa fa-plus"></i>
+                                                     </button>
+                                                 </div>
+                                           </div>                                         
+                                     </div>
+                                 </div>
+                                 <!--/span-->                                 
+                                 
+                                 <div class="col-md-6">
+                                     <div class="form-group row">
+                                         <label class="control-label text-right col-md-3">Oficina:<span class="text-danger">*</span></label>                                         
+                                          <div class="col-md-9 input-group">
+                                                                                             
+                                                <input type="hidden" id="codOficina"
+													name="codOficina"
+													th:value="${usuarioDTO.codOficina}" />	
+                                                
+                                                <input type="text" id="oficina" name="oficina"
+							                           th:readonly="true" th:value="${usuarioDTO.descOficina}"
+                                                       class="form-control" placeholder="Seleccionar Oficina">     
+                                                 <div class="input-group-append">
+                                                     <button id="btnSeleccionarOfi" title="Seleccionar Oficina" 
+                                                            class="btn btn-info" type="button"
+                                                            th:onclick="'javascript:mostrarModalOficinas(2);'">
+                                                        <i class="fa fa-plus"></i>
+                                                     </button>
+                                                 </div>
+                                           </div>
+                                          
+                                          
+                                          
+                                          
+                                     </div>
+                                 </div>
+                                 <!--/span-->                                    
+                                     
+                             </div> 							
+                             <!--/row-->
+                             
+                             
+                             <div class="row">
+                                 
+                                 <div class="col-md-6">
+                                      <div class="form-group row">
+                                          <label class="control-label text-right col-md-3">F.Ingreso Min.:<span class="text-danger">*</span></label>
+                                          <div id='fecIngresoMin' class="input-group col-md-9">
+                                              <input type="text" id='fechaInMin' name="fechaInMin"
+												th:field="*{fechaInMin}" class="form-control"  th:disabled="${flagEditar}"
+												placeholder="dd/mm/yyyy"/>
+											 <span class="input-group-addon">
+											    <i class="far fa-calendar-alt"></i>
+											 </span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!--/span-->                                                         
+                                     
+                             </div> 							
+                             <!--/row-->  
+                             
+                            <h3 class="box-title">Datos de Login</h3>
+                            <hr class="m-t-0 m-b-40">
+                             
+                             <div class="row">
+                                 
+                                 <div class="col-md-6">
+                                     <div class="form-group row">
+                                         <label class="control-label text-right col-md-3">User Name:<span class="text-danger">*</span></label>
+                                         <div class="col-md-9">
+                                             <input type="text" id="nMstLogin" name="nMstLogin"
+						                           th:field="*{nMstLogin}" th:readonly="${flagEditar}"
+                                                   class="form-control" placeholder="Ingrese User Name">                                                  
+                                          </div>
+                                     </div>
+                                 </div>
+                                 <!--/span--> 
+                                 
+                                 
+                                 <div class="col-md-6" th:hidden="${flagEditar}">
+                                     <div class="form-group row">
+                                         <label class="control-label text-right col-md-3">Password:<span class="text-danger">*</span></label>
+                                         <div class="col-md-9">
+                                             <input type="password" id="password" name="password"
+						                            th:field="*{password}"
+                                                    class="form-control">                                                  
+                                          </div>
+                                     </div>
+                                 </div>
+                                 <!--/span-->                                                             
+                                     
+                             </div> 							
+                             <!--/row-->                              	
+                             
+                            <hr>				
+								
+						    </div>	
+						    
+								<div class="col-xs-12">
+									<div class="box-body" align="center">
+										<div class="box-body">
+											<button type="button" id="btnGuardarUsuario" 
+											        class="btn btn-success">GUARDAR</button>
+											<button type="button" class="btn btn-info"
+											th:onclick="'javascript:viewListaUsuarios();'">CANCELAR</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
+				 	
+				 	
+				 	</div>					
+
+				  </div>
+				
+				</div>
+
+			</div>
+			
+			
+			
+		  <!-- Inicio Modal selector de Oficinas -->
+
+			<div id="modalSelectorOficina" class="modal fade" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+						    <h4 class="modal-title" id="gridSystemModalLabel">Seleccionar
+								Oficina</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>						
+						</div>
+						<div class="modal-body"></div>
+					</div>
+				</div>
+			</div>
+			<!-- Fin Modal selector de Oficinas -->
+						
+
+		
+
+		<!-- aca van los js -->
+		<script type="text/javascript" th:inline="javascript"
+			th:src="@{/app/usuarios/usuario.js}"></script>
+
+	</div>
+
+
+
+</body>
+
+</html>

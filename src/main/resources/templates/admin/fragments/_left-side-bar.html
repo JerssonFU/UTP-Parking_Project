@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<aside class="left-sidebar">
+   <!-- Sidebar scroll-->
+   
+   <div class="scroll-sidebar">
+   
+       <!-- Sidebar navigation-->
+       
+       <nav class="sidebar-nav">
+       
+           <ul id="sidebarnav">
+
+               <li class="user-profile">
+
+                   <a class="fa fa-drivers-license-o" href="javascript:void(0)" aria-expanded="false">
+
+                       <img th:src="@{/assets/images/users/user-9.png}" alt="user" />
+
+                       <span class="hide-menu" th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+                             ¡Hola
+	                          <span th:text="${currentUser.nombres}" >
+	                            	info
+	                         </span>
+                           !
+		          	 </span>
+
+                   </a>
+               </li>
+               
+               <li class="nav-devider"></li>
+
+               <li>
+                   <a class="waves-effect waves-dark" th:href="@{/inicio}" aria-expanded="false">
+                       <i class="bi bi-house-fill"></i>
+                       <span class="hide-menu">Inicio</span>
+                   </a>
+               </li>
+
+               <li>
+                   <a class="waves-effect waves-dark" th:href="@{/vehiculos}" aria-expanded="false">
+                       <i class="bi bi-car-front"></i>
+                       <span class="hide-menu">Registro de vehiculo</span>
+                   </a>
+               </li>
+
+               <li>
+                   <a class="waves-effect waves-dark" th:href="@{/solicitudes}" aria-expanded="false">
+                       <i class="bi bi-card-list"></i>
+                       <span class="hide-menu">Mis solicitudes</span>
+                   </a>
+               </li>
+               <li>
+                   <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                       <i class="bi bi-globe"></i>
+                       <span class="hide-menu">Otros</span>
+                   </a>
+               </li>
+
+               <li>
+                   <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                       <i class="bi bi-plus-square-dotted"></i>
+                       <span class="hide-menu">Ayuda</span>
+                   </a>
+               </li>
+           </ul>
+       </nav>
+
+   </div>
+
+</aside>  
+  
+  
+</html>

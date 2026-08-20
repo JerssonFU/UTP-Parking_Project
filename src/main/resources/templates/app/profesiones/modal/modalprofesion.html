@@ -1,0 +1,78 @@
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- sample modal content -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+	id="modalprofesion" aria-labelledby="myLargeModalLabel"
+	aria-hidden="true" style="display: none;"
+	th:fragment="fragmodalprofesion">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myLargeModalLabel">PROFESIÓN</h4>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+			</div>
+			<div class="modal-body">
+				<form class="p-r-20" th:object="${objProfesion}" id="frmProfesion">
+					<input type="hidden" th:field="*{cprofcodigo}">
+					<div class="form-group">
+						<label class="control-label">Nombre Profesión</label> 
+						<input type="text" class="form-control" placeholder="Nompre Profesión" th:field="*{nprofnombre}">
+					</div>
+					<div class="form-group">
+						<label class="control-label">Estado</label> 
+						<select th:field="*{fprofestado}" class="form-control">
+							<option value="1">ACTIVO</option>
+							<option value="0">INACTIVO </option>
+						</select>
+						
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success btn-sm waves-effect text-left" id="btnSaveProfesion"><i class="ti-save"></i> Guardar</button>
+				<button type="button" class="btn btn-danger btn-sm waves-effect text-left" data-dismiss="modal"><i class="ti-close"></i> Salir</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<script type="text/javascript" th:inline="javascript">
+
+		var header = $("meta[name='_csrf_header']").attr("content");
+		var token = $("meta[name='_csrf']").attr("content");
+		var _ctx =$("meta[name='ctx']").attr("content");
+		
+		$("#btnSaveProfesion").on("click",function(){
+	
+			var data = new FormData(document.getElementById("frmProfesion"));
+			$.LoadingOverlay("show");
+			
+			$.ajax({
+				data : data,
+				type : 'POST',
+				processData : false,
+				contentType : false,
+		        cache: false,
+				url: _ctx+'/rest/profesiones/guardarprofesion',
+				beforeSend: function(xhr) {
+					 xhr.setRequestHeader(header,token);
+					 } ,
+			    success: (data) => {
+			    	var table = $('#tblProfesiones').DataTable();
+			    	var url=_ctx+'/rest/profesiones/listarprofesiones';
+			    		reloadTable(table,url);
+			    	$("#modalprofesion").modal('hide');
+			    	$.LoadingOverlay("hide"); 
+			    	
+			    },
+			    complete: function () {
+			    	
+		        },
+			});
+		});
+	</script>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

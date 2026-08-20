@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/admin-layout}">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Listado de Usuarios</title>
+</head>
+<body>
+ <div th:fragment="fraglistarprofesiones">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-header bg-info">
+				<h4 class="m-b-0 text-white">Lista de Profesiones</h4>
+			</div>
+			<div class="card-body">
+					<table id="tblProfesiones"
+						class="table table-bordered table-striped table-hover"
+						style="width: 100%">
+						<thead>
+							<tr>
+								<th>Nombre Profesión</th>
+								<th>Fecha Registro</th>
+								<th>Fecha Modificación</th>
+								<th>Usuario Registro</th>
+								<th>Usuario Modificación</th>
+								<th>Estado</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>Nombre Profesión</th>
+								<th>Fecha Registro</th>
+								<th>Fecha Modificación</th>
+								<th>Usuario Registro</th>
+								<th>Usuario Modificación</th>
+								<th>Estado</th>
+								<th></th>
+
+							</tr>
+						</tfoot>
+					</table>
+				<div id="modalshow"></div>
+			</div>
+	  </div>
+	</div>
+	<script type="text/javascript" th:inline="javascript"
+			th:src="@{/app/profesiones/listarprofesiones.js}"></script>
+</div>
+</body>

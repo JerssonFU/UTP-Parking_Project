@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+</head>
+
+<body>
+
+	<div th:fragment="modalTipoUsuario">        
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+				 <div class="card ">	
+				 
+				     <div class="card-header bg-info">
+                          <h4 class="m-b-0 text-white">REGISRO TIPO DE USUARIOS</h4>
+                     </div>
+				 
+				 	 <div class="card-body">
+				 	
+				 	   <form th:object="${tipoUsuDTO}" class="form-horizontal" role="form"
+								id="frmTipoUsuario" name="frmTipoUsuario" 
+								th:action="@{/tipousuario/guardarDatosTipoUsuario}"
+								method="post" enctype="multipart/form-data">
+								
+								
+							<input type="hidden" id="cTusuCodigo"
+										name="cTusuCodigo"
+										th:value="${tipoUsuDTO.cTusuCodigo}" />	
+								
+						     <div class="form-body">
+						     
+						       <h3 class="box-title">Datos Generales</h3>
+                               <hr class="m-t-0 m-b-40">   
+						     
+						     
+						     <div class="form-group">
+                                <label class="control-label">Descripcion:<span class="text-danger">*</span></label>
+                                 <input type="text" id="nTusuDescripcion" name="nTusuDescripcion"
+										th:field="*{nTusuDescripcion}"
+                                        class="form-control" placeholder="Ingrese descripcion"> 
+						     </div>
+						     
+						     <div class="form-group">
+                                <label class="control-label">Estado:<span class="text-danger">*</span></label>
+                                <select id="fTusuEstado" name="fTusuEstado" 
+                                        th:field="*{fTusuEstado}"
+                                        class="form-control custom-select">
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+	                             </select>
+						     </div>
+						     
+						     <div class="form-group">
+                                 <label class="control-label">Alias:<span class="text-danger">*</span></label>
+                                  <input type="text" id="cTusuDetalle" name="cTusuDetalle"
+							             th:field="*{cTusuDetalle}" 
+                                         class="form-control" placeholder="Ingrese Detalle">      
+						     </div>                                        
+                             
+                            <hr>				
+								
+						    </div>	
+						    
+								<div class="col-xs-12">
+									<div class="box-body" align="center">
+										<div class="box-body">
+											<button type="button" id="btnGuardarTipoUsuario" 
+											        class="btn btn-success">GUARDAR</button>											
+											<button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+										</div>
+									</div>
+								</div>
+
+							</form>				 	
+				 	
+				 	   </div>					
+
+				  </div>
+				
+				</div>
+
+			</div>				 
+			
+		</div>
+
+		<!-- aca van los js -->
+		<script type="text/javascript" th:inline="javascript"
+			th:src="@{/app/modals/modal.tipo.usuario.js}"></script>	
+
+</body>
+
+</html>
